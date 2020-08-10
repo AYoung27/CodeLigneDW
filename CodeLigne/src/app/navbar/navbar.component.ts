@@ -17,10 +17,11 @@ export class NavbarComponent implements OnInit {
   });
 
   mostrar:boolean;
-
-  constructor(private httpClient:HttpClient, private router:Router, private auth:AuthService) { }
+  id:any
+  constructor(private httpClient:HttpClient, private router:Router, private route:ActivatedRoute,private auth:AuthService) { }
 
   ngOnInit(): void {
+    this.id=this.route.snapshot.paramMap.get('id');
     if(document.location.href=='http://localhost:4200/landingPage'){
       this.mostrar=false;
     }else{
@@ -33,7 +34,7 @@ export class NavbarComponent implements OnInit {
         if(res.codigo==1){
           let id = res.user
           localStorage.setItem('token',res.token);
-          this.router.navigate(['principal',id]);
+          this.router.navigate(['principal',{id:id}]);
           
         }else{
           console.log('error')

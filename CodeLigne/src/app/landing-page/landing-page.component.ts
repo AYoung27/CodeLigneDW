@@ -26,7 +26,7 @@ export class LandingPageComponent implements OnInit {
     this.auth.registro(this.formRegistro.value).subscribe((res:any)=>{
         if(res.codigo==1){
           localStorage.setItem('token',res.token);
-          this.router.navigate(['principal', res.user]);
+          this.router.navigate(['principal', {id:res.user}]);
         }else{
           console.log(res.mensaje);
         }

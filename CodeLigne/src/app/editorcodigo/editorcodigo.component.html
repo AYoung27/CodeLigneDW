@@ -7,11 +7,11 @@
         </div>
         <div class="col-lg-6">
             <div class="float-left">
-            <a class="enlace" (click)=ejecutar()><i id="ejecutar" class="far fa-3x fa-play-circle mr-3"></i></a>
-            <a class="enlace" (click)=guardar()><i class="far fa-3x fa-save mr-3"></i></a>
-            <a class="enlace" (click)=limpiar()><i class="far fa-3x fa-trash-alt mr-3"></i></a>
+            <a class="enlace" (click)="ejecutar()"><i id="ejecutar" class="far fa-3x fa-play-circle mr-3"></i></a>
+            <a class="enlace" (click)="guardar()"><i class="far fa-3x fa-save mr-3"></i></a>
+            <a class="enlace" (click)="limpiar()"><i class="far fa-3x fa-trash-alt mr-3"></i></a>
             <i class="far fa-3x fa-arrow-alt-circle-down mr-3"></i>
-            <i class="far fa-3x fa-times-circle"></i>
+            <a class="enlace" (click)="cerrar()"><i class="far fa-3x fa-times-circle"></i></a>
         </div>
         </div>
     </div>
@@ -70,9 +70,6 @@
             
         </div>
     </div>
-
-    <div class="col-l mx-auto">
-        <button type="button" class="btn btn-primary form-control" (click)="ejecutar()">ejecutar</button>
-    </div>
     
 </div>
+<app-sidebar></app-sidebar>

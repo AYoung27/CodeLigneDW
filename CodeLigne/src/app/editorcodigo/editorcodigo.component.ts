@@ -30,11 +30,11 @@ export class EditorcodigoComponent implements OnInit {
   idProyecto:any;
   nombreProyecto:any;
 
-  constructor(private doms : DomSanitizer,private httpClient:HttpClient, private route:ActivatedRoute) { }
+  constructor(private doms : DomSanitizer,private httpClient:HttpClient, private route:ActivatedRoute, private router:Router) { }
   
 
   ngOnInit(): void {
-    this.idUsuario=this.route.snapshot.paramMap.get('idUsuario');
+    this.idUsuario=this.route.snapshot.paramMap.get('id');
     this.idCarpeta=this.route.snapshot.paramMap.get('idCarpeta');
     this.idProyecto=this.route.snapshot.paramMap.get('idProyecto');
     this.httpClient.get(this.url+this.idUsuario+'/carpetas/'+this.idCarpeta+'/proyectos/'+this.idProyecto).subscribe((res:any)=>{
@@ -65,5 +65,9 @@ export class EditorcodigoComponent implements OnInit {
     this.codigoHTML='';
     this.codigoCSS='';
     this.codigoJS='';
+  }
+
+  cerrar(){
+    this.router.navigate(['proyectos',{id:this.idUsuario,idCarpeta:this.idCarpeta}]);
   }
 }

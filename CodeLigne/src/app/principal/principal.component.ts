@@ -28,7 +28,6 @@ export class PrincipalComponent implements OnInit {
     console.log(this.id);
     this.httpClient.get(this.url+this.id+'/carpetas').subscribe((res:any)=>{
       this.carpetas=res.carpetas;
-      console.log(res.carpetas);
       
     });
   }

@@ -24,7 +24,7 @@ router.post('/signUp',function(req,res){
     
     });
     u.save().then(result=>{
-        var token=jwt.sign(JSON.stringify(result),jwtSecret);
+        var token=jwt.sign(JSON.stringify(result._id),jwtSecret);
         res.json({codigo:1,user:result._id,mensaje:"Usuario registrado", token:token});
         res.end();
     }).catch(error=>{
@@ -46,7 +46,7 @@ router.post('/signIn',function(req,res){
             const correctPass = comparePass(req.body.password,result.password);
            if(correctPass){
 
-            var token=jwt.sign(JSON.stringify(result),jwtSecret);
+            var token=jwt.sign(JSON.stringify(result._id),jwtSecret);
             res.json({codigo:1,mensaje:'usuario aceptado',user:result._id,token:token})
             
            }else{
