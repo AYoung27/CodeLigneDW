@@ -1,0 +1,13 @@
+<a class="enlace" [routerLink]="['/editor',{'idUsuario':idUsuario, 'idCarpeta':idCarpeta,'idProyecto':proyecto._id}]">
+    <div class="card">
+        <img src="assets/img/proyecto.png" class="card-img-top mr-auto ml-auto"  alt="EditarCodigo" >
+        
+        <div class="card-body">
+            <h5 class="fs">{{proyecto.nombreProyecto}}</h5>
+            <p class="fs">{{proyecto.descripcion}}</p>
+            <span class="badge badge-pill badge-danger mr-2">HTML</span>
+            <span class="badge badge-pill badge-primary mr-2">CSS</span>
+            <span class="badge badge-pill badge-warning mr-2">JS</span>
+        </div>
+    </div>
+    </a>

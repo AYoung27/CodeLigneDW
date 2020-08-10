@@ -1,0 +1,67 @@
+.sidebar {
+    background: #fff;
+    position: fixed;
+    height: 100vh;
+    min-width: 320px;
+    max-width: 75%;
+    top: 0;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,.05);
+    right: -100%;
+    transition: right 0.25s ease;
+    z-index: 40000;
+    
+}
+.sidebarOpen {
+    right: 0 !important;
+
+}
+.sidebar-header {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 72px;
+    box-shadow: 0 2px 2px 0 rgba(117,117,117,0.1);
+    padding: 10px 20px;
+}
+
+.enlace{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.enlace:hover{
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.btn-outline-light{
+    color: #fff;
+    border-color: #fff!important;
+    border-radius: 50px;
+    background-color: #2f4858;
+}
+
+
+  
+  .btn-outline-light:hover {
+    color: #2f4858;
+    background-color: #fff;
+    border-color: #2f4858;
+  }
+
+  .btn-outline-light:focus, .btn-outline-light.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0,101,141, 0.5);
+  }
+
+  .btn-outline-light.disabled, .btn-outline-light:disabled {
+    color: #2f4858;
+    background-color: transparent;
+  }

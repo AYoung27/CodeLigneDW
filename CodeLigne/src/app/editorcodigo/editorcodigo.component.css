@@ -1,0 +1,32 @@
+.container{
+    max-height: 100%;
+    max-width: 100%;
+    padding: 0;
+}
+
+.editor{
+    height: 100%;
+    width: 100%;
+}
+.headerEditor{
+    background-color: #00658d;
+    height: 25px;
+    padding-left: 20px;
+}
+
+.visualizador{
+    height: 100%;
+    width: 100%
+}
+
+.enlace{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.enlace:hover{
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}

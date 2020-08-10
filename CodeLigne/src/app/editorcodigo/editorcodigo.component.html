@@ -1,0 +1,78 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 style="margin-left: 35%;">{{nombreProyecto}}</h2>
+        </div>
+        <div class="col-lg-6">
+            <div class="float-left">
+            <a class="enlace" (click)=ejecutar()><i id="ejecutar" class="far fa-3x fa-play-circle mr-3"></i></a>
+            <a class="enlace" (click)=guardar()><i class="far fa-3x fa-save mr-3"></i></a>
+            <a class="enlace" (click)=limpiar()><i class="far fa-3x fa-trash-alt mr-3"></i></a>
+            <i class="far fa-3x fa-arrow-alt-circle-down mr-3"></i>
+            <i class="far fa-3x fa-times-circle"></i>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 p-0">
+            <div class="row">
+                <div class="col-lg-12">    
+                    <div class="headerEditor">
+                        <p class="text-white ml-2"><i class="fas fa-angle-down"></i> Codigo HTML</p>
+                    </div>
+                    <ngx-codemirror 
+                        [options]="{lineNumbers:true,
+                                    theme: 'dracula',
+                                    mode: 'htmlmixed'}"
+                        [(ngModel)]="codigoHTML"
+                        class="editor"
+                    ></ngx-codemirror>
+                </div>    
+            </div>
+            <div class="row">
+                <div class="col-lg-12">    
+                    <div class="headerEditor">
+                        <p class="text-white ml-2"><i class="fas fa-angle-down"></i> Codigo CSS</p>
+                    </div>
+                    <ngx-codemirror 
+                        [options]="{lineNumbers:true,
+                                    theme: 'dracula',
+                                    mode: 'css'}"
+                        [(ngModel)]="codigoCSS"
+                        class="editor"
+                    ></ngx-codemirror>
+                </div>    
+            </div> 
+   
+        </div>
+        <div class="col-lg-6 p-0">
+            <div class="row">
+                <div class="col-lg-12 pr-4">    
+                    <div class="headerEditor">
+                        <p class="text-white ml-2"><i class="fas fa-angle-down"></i> Codigo JavaScript</p>
+                    </div>
+                    <ngx-codemirror 
+                        [options]="{lineNumbers:true,
+                        theme: 'dracula',
+                        mode: 'javascript'}"
+                        [(ngModel)]="codigoJS"
+                        class="editor"
+                    ></ngx-codemirror>
+                </div>
+            </div>
+            <div class="row" style="height: 325px;">
+                <div class="col-lg-12">
+                        <iframe class="visualizador" [srcdoc]="contenido | noSanitize"></iframe>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="col-l mx-auto">
+        <button type="button" class="btn btn-primary form-control" (click)="ejecutar()">ejecutar</button>
+    </div>
+    
+</div>

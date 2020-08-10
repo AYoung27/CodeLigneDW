@@ -1,0 +1,41 @@
+.bg-dark{
+    background-color: #2f4858!important;
+}
+
+.form-control{
+    height: 25px!important;
+    border-radius: 15px!important;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #00000057;
+}
+
+.btn{
+    height: 25px!important;
+    border-radius: 15px!important;
+    padding-top: 0%;
+    color: #f7f4ea;
+}
+
+.btn-outline {
+    color: #2f4858!important;
+    border-color: #2f4858!important;
+    background-color: #fff;
+  }
+  
+  .btn-outline:hover {
+    color: #2f4858;
+    background-color: #fff;
+    border-color: #2f4858;
+  }
+
+  .enlace{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.enlace:hover{
+  text-decoration: none;
+  color: inherit;
+}

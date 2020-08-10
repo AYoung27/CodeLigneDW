@@ -1,0 +1,41 @@
+.divCard{
+    transform:scale(1,1);
+    transition-duration:100ms;
+  }
+
+.divCard:hover{
+    transform:scale(1.12,1.12);
+    transition-duration:100ms;
+}
+
+.card-header{
+    background-color: #2f4858;
+    color: white;
+}
+.card-body{
+  background-color: #fff;
+}
+
+.btn-outline-light{
+    color: #2f4858;
+    border-color: #2f4858!important;
+    border-radius: 50px;
+    background-color: #fff;
+}
+
+
+  
+  .btn-outline-light:hover {
+    color: #fff;
+    background-color: #2f4858;
+    border-color: #fff;
+  }
+
+  .btn-outline-light:focus, .btn-outline-light.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0,101,141, 0.5);
+  }
+
+  .btn-outline-light.disabled, .btn-outline-light:disabled {
+    color: #2f4858;
+    background-color: transparent;
+  }

@@ -1,0 +1,15 @@
+
+.fs{
+    font-size: small;
+}
+
+.enlace{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.enlace:hover{
+  text-decoration: none;
+  color: inherit;
+}

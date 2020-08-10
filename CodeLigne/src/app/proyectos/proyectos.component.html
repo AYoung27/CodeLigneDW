@@ -1,0 +1,67 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="row mt-3 mb-4">
+                <button class="btn btn-outline-light ml-auto mr-auto" (click)="abrirModalProyecto(nuevoProyecto)">Nuevo Proyecto</button>
+            </div>
+            
+                <div class="row mb-3 ml-auto mr-auto">
+                    <div class="col-lg-2">
+                        <i class="far fa-clock"></i>
+                    </div>
+                    <div class="col-lg-8">
+                        <a href="#" class="enlace">Recientes</a>
+                    </div>
+                </div>
+                <div class="row mb-3 ml-auto mr-auto">
+                    <div class="col-lg-2">
+                        <i class="far fa-star "></i>
+                    </div>
+                    <div class="col-lg-8">
+                        <a href="#" class="enlace">Destacados</a>
+                    </div>    
+                </div>
+                <div class="row mb-3 ml-auto mr-auto">
+                    <div class="col-lg-2">
+                        <i class="far fa-trash-alt"></i>
+                    </div>
+                    <div class="col-lg-8">
+                        <a href="#" class="enlace">Papelera</a>
+                    </div>    
+                </div>
+           
+        </div>
+        <div class="col-lg-8 mt-5" >
+            <div class="row" id="proyectos">
+                <div class="col-lg-3" *ngFor="let proyecto of proyectos">
+                    <app-card-proyectos [proyecto]="proyecto" [idUsuario]="idUsuario" [idCarpeta]="idCarpeta"></app-card-proyectos>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            detalles y opciones del proyecto
+        </div>
+
+    </div>
+
+</div>
+<app-sidebar></app-sidebar>
+<ng-template #nuevoProyecto let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Agregar una nuevo proyecto</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <label for="nombreCarpeta">Nombre Proyecto:</label>
+        <input class="form-control" type="text" name="" id="nombreCarpeta" [(ngModel)]="nuevo.nombreProyecto">
+        <label for="descripcion">Descripcion:</label>
+        <input class="form-control" type="text" id="descripcion" [(ngModel)]="nuevo.descripcion">
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="nProyecto()">Agregar</button>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+    </div>
+  </ng-template>

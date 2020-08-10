@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+<div class="container"> 
+    <div class="row divFondo">
+
+        <div class="col-lg-6">
+            <div class="row mt-5 ml-auto mr-auto PLe">
+                <h1 class="text-white">¡Asombroso!</h1>
+                <h5 class="text-white">CODE LIGNE te permite construir, probar y descubrir el código front-end, 
+                    en distintos lenguajes, sin la necesidad de tener ningun programa instalado.</h5>
+                    <h4 class="text-white"> No esperes mas unete a la comunidad LIGNE
+                        <br>Registrate y comienza YA!
+                    </h4>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="divRegistrar">
+                <div class="container">
+                    <div class="row">
+                        <h4 class="text-white ml-auto mr-auto">Registrate ahora</h4>
+                    </div>
+                    <form [formGroup]="formRegistro">
+                    <input type="text" class="form-control mt-3" placeholder="Nombre" formControlName="nombre">
+                    <input type="text" class="form-control mt-3" placeholder="Apellido" formControlName="apellido">
+                    <input type="email" class="form-control mt-3" placeholder="Email" formControlName="email">
+                    <input type="password" class="form-control mt-3" placeholder="Password" formControlName="password">
+                    
+                    <div class="row mt-5"> <br><br>
+                        <a (click)="registrarUsuario()"><button class="btn btn-outlineB ml-auto mr-auto">Registrar</button></a>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    
+    <div class="row divCards">
+        
+        <div class="col-lg-4">
+            <div class="card">
+                <img src="assets/img/codigo.png" class="card-img-top mr-auto ml-auto Timg" alt="EditarCodigo" >
+                
+                <div class="card-body">
+                    <h5 class="card-title text-center">Ejecutar Codigo </h5> <br>
+                    <p class="card-text">Puedes Editar y ejecutar tu codigo HTML, CSS y JavaScrip, en linea facil y rapido.</p>
+                </div>
+            </div>
+        </div>
+       
+        <div class="col-lg-4">
+            <div class="card">
+                <img src="assets/img/comunidad.png" class="card-img-top mr-auto ml-auto Timg" alt="ComunidadPremium">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Comunidad</h5> <br>
+                    <p class="card-text">Unete a la comunidad de personas que ahora ejecutan fragmentos de codigo en linea.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card">
+                <img src="assets/img/multiplataforma.png" class="card-img-top mr-auto ml-auto Timg" alt="Multiplataforma">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Multiplataforma </h5> <br>
+                    <p class="card-text">Puedes ingresar desde cualquier dispositivo, somos multiplataforma y estamos a tu alcance 24/7.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <span class="ml-auto mr-auto"> &#xa9; CodeLigne 2020</span>
+    </div>    
+    <br><br>
+
+</div>

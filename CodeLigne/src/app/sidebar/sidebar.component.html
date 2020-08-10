@@ -1,0 +1,37 @@
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right sidebar" id="sidebar-wrapper">
+      <div class="sidebar-header">
+          <img class="rounded-circle" src="assets/img/user.webp" alt="">
+          <h4 class="ml-3 mr-4">{{nombre}}</h4>
+          <a class="enlace" (click)="closeToggle()"><i class="fas fa-2x fa-arrow-right" ></i></a>
+      </div>
+      <div class="list-group list-group-flush">
+          <a class="enlace ml-auto mr-auto mt-3" (click)=abrirModal(modalModificarPerfil)>Modificar Perfil</a>
+
+          <a class="enlace ml-auto mr-auto mt-3" (click)=abrirModal(modalModificarPerfil)>Cambiar contraseña</a>
+      </div>
+      <div class="mt-auto ml-auto mr-auto mb-5">
+            <a class="enlace" (click)="cerrarSesion()" ><button class="btn btn-outline-light">Cerrar sesion</button></a>
+
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+
+    <ng-template #modalModificarPerfil let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modificarPerfil()">Guardar cambios</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+    </ng-template>
+   

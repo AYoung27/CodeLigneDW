@@ -1,0 +1,28 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  
+  <a class="navbar-brand" href="#"><img src="assets/img/cd-logo.png" height="40"> </a>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="ml-auto" id="login">
+      
+      <form [formGroup]="formLogin" class="form-inline my-2 my-lg-0" *ngIf="mostrar==false">
+        <input type="email" class="form-control mr-2" placeholder="Email" formControlName="email">
+        <input type="password" class="form-control mr-2" placeholder="Password" formControlName="password">
+        <a class="enlace" (click)="iniciarSesion()"><button class="btn btn-outline">Entrar</button></a>
+      </form>
+
+      <div *ngIf="mostrar==true">
+        <img class="rounded-circle" src="assets/img/user.webp" alt="usuario" (click)=toggleSidebar()>
+      </div>
+
+   
+    </div>
+  </div>
+
+</nav>

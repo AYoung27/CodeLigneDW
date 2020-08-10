@@ -1,0 +1,12 @@
+
+
+    <a class="enlace" [routerLink]="['/proyectos',{id:idUsuario,idCarpeta:carpeta._id}]">
+    <div class="card">
+        <img src="assets/img/carpeta.png" class="card-img-top mr-auto ml-auto"  alt="EditarCodigo" >
+        
+        <div class="card-body">
+            <h5 class="fs">{{carpeta.nombreCarpeta}}</h5>
+            <p class="fs">{{carpeta.descripcion}}</p>
+        </div>
+    </div>
+    </a>
