@@ -17,6 +17,7 @@ export class PrincipalComponent implements OnInit {
    id:any;
   url='http://localhost:8888/usuarios/';
   carpetas=[];
+  contadorCarpetas:any;
   constructor(private httpClient:HttpClient,private router:Router,private route:ActivatedRoute,private modalService:NgbModal) { 
     
   }
@@ -28,6 +29,7 @@ export class PrincipalComponent implements OnInit {
     console.log(this.id);
     this.httpClient.get(this.url+this.id+'/carpetas').subscribe((res:any)=>{
       this.carpetas=res.carpetas;
+      this.contadorCarpetas=res.nCarpetas;
       
     });
   }
@@ -42,14 +44,21 @@ export class PrincipalComponent implements OnInit {
   }
 
   nCarpeta(){
+    if(this.contadorCarpetas>0 || this.contadorCarpetas=='ilimitado'){
     this.httpClient.put(this.url+this.id,this.nueva).subscribe((res:any)=>{
       if(res.ok==1){
         this.modalService.dismissAll();
+        this.contadorCarpetas--;
+        this.httpClient.put(this.url+this.id+'/actualizarCarpetas',{nCarpetas:this.contadorCarpetas}).subscribe((res:any)=>{})
         this.ngOnInit();
       }
     })
+    
+  }else{
+    alert('Has sobrepasado el numero de carpetas para tu plan');
+    this.modalService.dismissAll()
   }
-
+  }
   
 
 }

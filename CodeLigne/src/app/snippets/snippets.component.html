@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
 <div class="container">
     <div class="row">
-        <div class="col-6 col-sm-6 col-md-2 col-lg-2">
+        <div class="col-lg-2">
             <div class="row mt-3 mb-4">
-                <button class="btn btn-outline-light ml-auto mr-auto" (click)="abrirModalCarpeta(nuevaCarpeta)">Nueva carpeta</button>
+                <button class="btn btn-outline-light ml-auto mr-auto" (click)="abrirModalSnippet(nuevoSnippet)">Nuevo Snippet</button>
             </div>
             
                 <div class="row mb-3 ml-auto mr-auto">
@@ -16,10 +16,10 @@
                 </div>
                 <div class="row mb-3 ml-auto mr-auto">
                     <div class="col-lg-2">
-                        <i class="far fa-file-code"></i>
+                        <i class="far fa-star "></i>
                     </div>
                     <div class="col-lg-8">
-                        <a href="#" class=" enlace" [routerLink]="['/snippets',{'id':id}]">Snippets</a>
+                        <a href="#" class="enlace">Destacados</a>
                     </div>    
                 </div>
                 <div class="row mb-3 ml-auto mr-auto">
@@ -32,40 +32,44 @@
                 </div>
            
         </div>
-        <div class="col-6 col-sm-6 col-md-8 col-lg-8 mt-5" >
-            <div class="row" id="carpetas">
-                <div class="col-sm-6 col-md-4 col-lg-3 mt-3" *ngFor="let carpeta of carpetas">
-                    <app-card-carpetas [carpeta]="carpeta" [idUsuario]="id"></app-card-carpetas>
+        <div class="col-lg-8 mt-5" >
+            <div class="row" id="proyectos">
+                <div class="col-lg-3 mt-3" *ngFor="let snippet of snippets">
+                    <app-card-snippets [snippet]="snippet" [idUsuario]="idUsuario" ></app-card-snippets>
                 </div>
-                
             </div>
         </div>
-        <div class="col-md-2 col-lg-2">
-            Detalles y Opciones de la carpeta
+        <div class="col-lg-2">
+            detalles y opciones del snippet
         </div>
 
     </div>
 
 </div>
-
 <app-sidebar></app-sidebar>
-
-<ng-template #nuevaCarpeta let-modal>
+<ng-template #nuevoSnippet let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Agregar una nueva carpeta</h4>
+      <h4 class="modal-title" id="modal-basic-title">Agregar una nuevo snippet</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-        <label for="nombreCarpeta">Nombre Carpeta:</label>
-        <input class="form-control" type="text" name="" id="nombreCarpeta" [(ngModel)]="nueva.nombreCarpeta">
+        <label for="nombreSnippet">Nombre Snippet:</label>
+        <input class="form-control" type="text" name="" id="nombreSnippet" [(ngModel)]="nuevo.nombreSnippet">
         <label for="descripcion">Descripcion:</label>
-        <input class="form-control" type="text" id="descripcion" [(ngModel)]="nueva.descripcion">
-
+        <input class="form-control" type="text" id="descripcion" [(ngModel)]="nuevo.descripcion">
+        <label for="lenguaje">Selecciona unLenguaje de programacion:</label>
+        <select id="lenguaje" class="custom-select" [(ngModel)]="nuevo.lenguaje">
+            <option value="php">PHP</option>
+            <option value="python">Python</option>
+            <option value="ruby">Ruby</option>
+            <option value="perl">Perl</option>
+            <option value="cobol">Cobol</option>
+        </select>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="nCarpeta()">Agregar</button>
+      <button type="button" class="btn btn-outline-dark" (click)="nSnippet()">Agregar</button>
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
     </div>
   </ng-template>

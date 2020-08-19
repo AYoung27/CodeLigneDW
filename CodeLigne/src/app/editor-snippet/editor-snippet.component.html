@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row justify-content-center">
+        <h1>Snippet {{snippet.nombreSnippet}}</h1>
+       
+    </div>
+    <div class="row justify-content-center" >
+        <div class="col-lg-10">
+            <div class="headerEditor">
+                <p class="text-white ml-2"><i class="fas fa-angle-down"></i> Codigo {{snippet.lenguaje}}</p>
+            </div>
+            <ngx-codemirror 
+                [options]="{lineNumbers:true,
+                            theme: 'dracula',
+                            mode: sintaxis(snippet.lenguaje)}"
+                [(ngModel)]="snippet.codigo"
+            ></ngx-codemirror>
+        </div>
+        <div class="col-lg-2">
+            <div class="row mb-3">
+                <a class="enlace" (click)="guardar()"><i class="far fa-3x fa-save mr-3"></i></a>
+            </div>
+            <div class="row mb-3">   
+                <a class="enlace" (click)="limpiar()"><i class="far fa-3x fa-trash-alt mr-3"></i></a>
+            </div> 
+            <div class="row">    
+                <a class="enlace" (click)="cerrar()"><i class="far fa-3x fa-times-circle"></i></a>
+            </div>    
+        </div>
+    </div>
+
+</div>
+<app-sidebar></app-sidebar>

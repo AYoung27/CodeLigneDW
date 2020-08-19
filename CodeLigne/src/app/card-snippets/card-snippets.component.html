@@ -1,0 +1,12 @@
+<a class="enlace" [routerLink]="['/editorSnippet',{'id':idUsuario, 'idsnippet':snippet._id}]">
+    <div class="card">
+        <img src="assets/img/proyecto.png" class="card-img-top mr-auto ml-auto"  alt="EditarCodigo" >
+        
+        <div class="card-body">
+            <h5 class="fs">{{snippet.nombreSnippet}}</h5>
+            <p class="fs">{{snippet.descripcion}}</p>
+            <span class="badge badge-pill mr-2 text-white" [style.background-color]="getColor(snippet.lenguaje)">{{snippet.lenguaje}}</span>
+
+        </div>
+    </div>
+    </a>

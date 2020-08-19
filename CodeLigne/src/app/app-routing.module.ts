@@ -6,7 +6,10 @@ import { LandingPageComponent} from './landing-page/landing-page.component'
 import { ProyectosComponent } from './proyectos/proyectos.component';
 import { PlanespagoComponent } from './planespago/planespago.component';
 import { EditorcodigoComponent } from './editorcodigo/editorcodigo.component';
+import { SnippetsComponent } from './snippets/snippets.component';
+import { EditorSnippetComponent } from './editor-snippet/editor-snippet.component'
 import { AuthGuard } from './auth.guard'
+
 
 
 const routes: Routes = [
@@ -15,7 +18,9 @@ const routes: Routes = [
    {path:'landingPage',component:LandingPageComponent},
    {path:'proyectos',component:ProyectosComponent,canActivate:[AuthGuard]},
    {path:'planes',component:PlanespagoComponent},
-   {path:'editor',component:EditorcodigoComponent,canActivate:[AuthGuard]}
+   {path:'editor',component:EditorcodigoComponent,canActivate:[AuthGuard]},
+   {path:'snippets',component:SnippetsComponent,canActivate:[AuthGuard]},
+   {path:'editorSnippet',component:EditorSnippetComponent,canActivate:[AuthGuard]}
 
 ];
 

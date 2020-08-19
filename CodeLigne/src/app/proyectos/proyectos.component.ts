@@ -20,6 +20,7 @@ export class ProyectosComponent implements OnInit {
     codigoCss:'',
     codigoJs:''
   }
+  contadorProyectos:any
   constructor(private httpClient:HttpClient,private route:ActivatedRoute, private modalService:NgbModal) { }
 
   ngOnInit(): void {
@@ -27,6 +28,9 @@ export class ProyectosComponent implements OnInit {
     this.idCarpeta=this.route.snapshot.paramMap.get('idCarpeta');
     this.httpClient.get(this.url+this.idUsuario+'/carpetas/'+this.idCarpeta+'/proyectos').subscribe((res:any)=>{
         this.proyectos=res.proyectos;
+    })
+    this.httpClient.get(this.url+this.idUsuario+'/proyectosRestantes').subscribe((res:any)=>{
+      this.contadorProyectos=res.nProyectos
     })
   }
   abrirModalProyecto(modal){
@@ -39,12 +43,19 @@ export class ProyectosComponent implements OnInit {
   }
 
   nProyecto(){
-    this.httpClient.put(this.url+this.idUsuario+'/carpetas/'+this.idCarpeta+'/proyectos',this.nuevo).subscribe((res:any)=>{
-      if(res.ok==1){
-        this.modalService.dismissAll();
-        this.ngOnInit();
-      }
-    })
+    if(this.contadorProyectos>0||this.contadorProyectos=='ilimitado'){
+      this.httpClient.put(this.url+this.idUsuario+'/carpetas/'+this.idCarpeta+'/proyectos',this.nuevo).subscribe((res:any)=>{
+        if(res.ok==1){
+          this.modalService.dismissAll();
+          this.contadorProyectos--;
+          console.log(this.contadorProyectos)
+          this.httpClient.put(this.url+this.idUsuario+'/actualizarProyectos',{nProyectos:this.contadorProyectos}).subscribe((res:any)=>{})
+          this.ngOnInit();
+        }
+      })
+    }else{
+      alert('Ha superado la cantidad de proyectos permitos')
+    }
   }
 
 }

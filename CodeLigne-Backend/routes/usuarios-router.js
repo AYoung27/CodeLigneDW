@@ -4,6 +4,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+const { updateOne } = require('../models/usuarios');
 
 var jwtSecret = 'codeligne_DW2020';
 
@@ -20,7 +21,8 @@ router.post('/signUp',function(req,res){
         apellido:req.body.apellido,
         email:req.body.email,
         password:password,
-        carpetas:[]
+        carpetas:[],
+        snippets:[]
     
     });
     u.save().then(result=>{
@@ -62,6 +64,68 @@ router.post('/signIn',function(req,res){
     });
 });
 
+//asignar planes
+router.put('/:idUsuario/planes',verifyToken,function(req,res){
+    usuario.updateOne(
+        { 
+          _id:mongoose.Types.ObjectId(req.params.idUsuario) 
+        },
+        { 
+            plan:mongoose.Types.ObjectId(req.body.idPlan)
+        })
+    .then(result=>{
+            res.send(result);
+            res.end();
+        }).catch(error=>{
+            res.send(error);
+            res.end();
+        })
+  
+});
+//asignar limites del plan
+router.put('/:idUsuario/valoresPlan',verifyToken,function(req,res){
+    usuario.updateOne(
+        {
+            _id:mongoose.Types.ObjectId(req.params.idUsuario)
+        },{
+            nCarpetas:req.body.nCarpetas,
+            nProyectos:req.body.nProyectos,
+            nSnippets:req.body.nSnippets
+        }
+    ).then(result=>{
+        res.send(result);
+        res.end();
+    }).catch(error=>{
+        res.send(error);
+        res.end()
+    })
+})
+
+//obtener valores del plan 
+router.get('/:idUsuario/planes',verifyToken,function(req,res){
+    usuario.aggregate([
+        {
+            $lookup:{
+                from:'planes',
+                localField:'plan',
+                foreignField:'_id',
+                as:'plan'
+            }
+        },{
+            $match:{
+                _id:mongoose.Types.ObjectId(req.params.idUsuario)
+            }
+        }  
+    ]).then(result=>{
+        res.send(result[0].plan[0]);
+        res.end()
+    }).catch(error=>{
+        res.send(error);
+        res.end();
+    })
+})
+
+
 //crear una carpeta
 router.put('/:idUsuario',verifyToken,function(req,res){
     usuario.update(
@@ -85,6 +149,23 @@ router.put('/:idUsuario',verifyToken,function(req,res){
             res.end();
         })
 });
+//reducir el numero de carpetas permitidas
+router.put('/:idUsuario/actualizarCarpetas',verifyToken,function(req,res){
+    usuario.updateOne(
+        {
+            _id:mongoose.Types.ObjectId(req.params.idUsuario)
+        },{
+            nCarpetas:req.body.nCarpetas
+        }
+    ).then(result=>{
+        res.send(result);
+        res.end();
+    }).catch(error=>{
+        res.send(error);
+        res.end();
+
+    })
+})
 
 //obtener un usuario
 router.get('/:idUsuario', verifyToken ,function(req,res){
@@ -106,7 +187,8 @@ router.get('/:idUsuario/carpetas',verifyToken,function(req,res){
             _id:req.params.idUsuario
         },{
             _id:true,
-            carpetas:true
+            carpetas:true,
+            nCarpetas:true,
         }).then(result=>{
         res.send(result);
         res.end();
@@ -134,6 +216,39 @@ router.get('/:idUsuario/carpetas/:idCarpeta/proyectos',verifyToken,function(req,
             res.end();
         })
 });
+//obtener el numero de proyectos restantes
+router.get('/:idUsuario/proyectosRestantes',verifyToken,function(req,res){
+    usuario.findOne(
+        {
+            _id:mongoose.Types.ObjectId(req.params.idUsuario)
+        },{
+            nProyectos:true
+        }
+    ).then(result=>{
+        res.send(result);
+        res.end();
+    }).catch(error=>{
+        res.send(error);
+        res.end();
+    })
+})
+//actualizar el numero de proyectos permitidos
+router.put('/:idUsuario/actualizarProyectos',verifyToken,function(req,res){
+    usuario.updateOne(
+        {
+            _id:mongoose.Types.ObjectId(req.params.idUsuario)
+        },{
+            nProyectos:req.body.nProyectos
+        }
+    ).then(result=>{
+        res.send(result);
+        res.end();
+    }).catch(error=>{
+        res.send(error);
+        res.end();
+
+    })
+}) 
 
 //obtener un proyecto de una carpeta
 router.get('/:idUsuario/carpetas/:idCarpeta/proyectos/:idProyecto',verifyToken,function(req,res){
@@ -208,6 +323,103 @@ router.put('/:idUsuario/carpetas/:idCarpeta/proyectos/:idProyecto',verifyToken,f
             res.end();
         })
 });
+
+//crear un snippet
+router.put('/:idUsuario/snippets',verifyToken,function(req,res){
+    usuario.update(
+        {
+            _id:mongoose.Types.ObjectId(req.params.idUsuario)
+        },
+        {
+            $push:{
+                snippets:{
+                    _id:mongoose.Types.ObjectId(),
+                    nombreSnippet:req.body.nombreSnippet,
+                    descripcion:req.body.descripcion,
+                    lenguaje:req.body.lenguaje,
+                    codigo:''
+                }
+            }
+        }).then(result=>{
+            res.send(result);
+            res.end()
+        }).catch(error=>{
+            res.send(result);
+            res.end();
+        })
+});
+
+//obtener todos los snippets
+router.get('/:idUsuario/snippets',verifyToken,function(req,res){
+    usuario.findOne(
+        {
+            _id:req.params.idUsuario
+        },{
+            _id:true,
+            snippets:true,
+            nSnippets:true
+        }).then(result=>{
+        res.send(result);
+        res.end();
+    }).catch(error=>{
+        res.send(error);
+        res.end();
+    })
+});
+
+//actualizar numero de snippets permitidos
+router.put('/:idUsuario/actualizarSnippets',verifyToken,function(req,res){
+    usuario.updateOne(
+        {
+            _id:mongoose.Types.ObjectId(req.params.idUsuario)
+        },{
+            nSnippets:req.body.nSnippets
+        }
+    ).then(result=>{
+        res.send(result);
+        res.end();
+    }).catch(error=>{
+        res.send(error);
+        res.end();
+
+    })
+}) 
+
+//obtener un snippet
+router.get('/:idUsuario/snippets/:idSnippet',verifyToken,function(req,res){
+    usuario.findOne(
+        {
+            _id:req.params.idUsuario,
+            "snippets._id":mongoose.Types.ObjectId(req.params.idSnippet)
+        },{
+            "snippets.$":true
+        }).then(result=>{
+            res.send(result.snippets[0]);
+            res.end();
+        }).catch(error=>{
+            res.send(error);
+            res.end();
+        })
+});
+//guardar codigo de un snippet
+router.put('/:idUsuario/snippets/:idSnippet',verifyToken,function(req,res){
+    usuario.updateOne(
+        { 
+          "_id":mongoose.Types.ObjectId(req.params.idUsuario), 
+          "snippets._id":mongoose.Types.ObjectId(req.params.idSnippet), 
+        },
+        { 
+          "$set":{ 'snippets.$.codigo':req.body.codigo}
+        })
+    .then(result=>{
+            res.send(result);
+            res.end();
+        }).catch(error=>{
+            res.send(error);
+            res.end();
+        })
+});
+
 
 module.exports=router;
 

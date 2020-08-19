@@ -19,7 +19,10 @@ import { CardCarpetasComponent } from './card-carpetas/card-carpetas.component';
 import { CardProyectosComponent } from './card-proyectos/card-proyectos.component';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { SidebarComponent } from './sidebar/sidebar.component'
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { SnippetsComponent } from './snippets/snippets.component';
+import { CardSnippetsComponent } from './card-snippets/card-snippets.component';
+import { EditorSnippetComponent } from './editor-snippet/editor-snippet.component'
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { SidebarComponent } from './sidebar/sidebar.component'
     NoSanitizePipe,
     CardCarpetasComponent,
     CardProyectosComponent,
-    SidebarComponent
+    SidebarComponent,
+    SnippetsComponent,
+    CardSnippetsComponent,
+    EditorSnippetComponent
   ],
   imports: [
     BrowserModule,

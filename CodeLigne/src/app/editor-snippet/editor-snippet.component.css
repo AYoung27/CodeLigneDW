@@ -1,0 +1,17 @@
+.headerEditor{
+    background-color: #00658d;
+    height: 25px;
+    padding-left: 20px;
+}
+
+.enlace{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.enlace:hover{
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}

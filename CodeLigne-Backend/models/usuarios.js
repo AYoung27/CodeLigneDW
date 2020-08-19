@@ -5,7 +5,12 @@ var esquema = new mongoose.Schema({
     apellido:String,
     email:String,
     password:String,
-    carpetas: mongoose.SchemaTypes.Array
+    carpetas: mongoose.SchemaTypes.Array,
+    snippets: mongoose.SchemaTypes.Array,
+    plan:mongoose.SchemaTypes.ObjectId,
+    nCarpetas:String,
+    nProyectos:String,
+    nSnippets:String
 })
 
 module.exports = mongoose.model('usuarios',esquema)
