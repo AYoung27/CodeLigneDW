@@ -26,9 +26,9 @@ export class CardSnippetsComponent implements OnInit {
         return 'green';
       case 'ruby':
         return 'red';
-      case 'perl':
+      case 'c++':
         return 'blue';
-      case 'cobol':
+      case 'perl':
         return 'peru';
       case 'otro':
         return 'sandybrown'       
