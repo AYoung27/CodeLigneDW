@@ -13,7 +13,9 @@
       
       <form [formGroup]="formLogin" class="form-inline my-2 my-lg-0" *ngIf="mostrar==false">
         <input type="email" class="form-control mr-2" placeholder="Email" formControlName="email">
+        <span class="error" *ngIf="email.invalid && (email.dirty || email.touched)">*</span>
         <input type="password" class="form-control mr-2" placeholder="Password" formControlName="password">
+        <p class="error" *ngIf="password.invalid && (password.dirty || password.touched)">*</p>
         <a class="enlace" (click)="iniciarSesion()"><button class="btn btn-outline">Entrar</button></a>
       </form>
 

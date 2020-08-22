@@ -61,9 +61,10 @@ export class SidebarComponent implements OnInit {
     this.httpClient.put(this.url+this.idUsuario+'/cambiarPass',{password:this.password.value}).subscribe((res:any)=>{
       if(res.ok==1){
         alert('contraseña Actualizada');
-        this.modalService.dismissAll
+        this.modalService.dismissAll()
       }else{
-        alert('no se pudo actualizar la contraseña')
+        alert('no se pudo actualizar la contraseña');
+        this.modalService.dismissAll()
       }
     })
   }

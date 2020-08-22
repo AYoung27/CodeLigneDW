@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var esquema = new mongoose.Schema({
     nombre:String,
     apellido:String,
-    email:String,
+    email:{type:String,unique:true},
     password:String,
     carpetas: mongoose.SchemaTypes.Array,
     snippets: mongoose.SchemaTypes.Array,

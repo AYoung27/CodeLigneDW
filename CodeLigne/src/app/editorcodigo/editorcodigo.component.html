@@ -1,21 +1,21 @@
 <app-navbar></app-navbar>
 
 <div class="container">
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-lg-6">
             <h2 style="margin-left: 35%;">{{nombreProyecto}}</h2>
         </div>
         <div class="col-lg-6">
-            <div class="float-left">
-            <a class="enlace" (click)="ejecutar()"><i id="ejecutar" class="far fa-3x fa-play-circle mr-3"></i></a>
-            <a class="enlace" (click)="guardar()"><i class="far fa-3x fa-save mr-3"></i></a>
-            <a class="enlace" (click)="limpiar()"><i class="far fa-3x fa-trash-alt mr-3"></i></a>
-            <i class="far fa-3x fa-arrow-alt-circle-down mr-3"></i>
-            <a class="enlace" (click)="cerrar()"><i class="far fa-3x fa-times-circle"></i></a>
+            <div class="float-right">
+            <button class="btn btn-danger btn-circle mr-2" (click)="ejecutar()" placement="top" ngbTooltip="Ejecutar"><i id="ejecutar" class="far fa-2x fa-play-circle"  ></i></button> 
+            <button class="btn btn-success btn-circle mr-2" (click)="guardar()" placement="top" ngbTooltip="Guardar"><i class="far fa-2x fa-save"></i></button>
+            <button class="btn btn-warning btn-circle mr-2" (click)="limpiar()" placement="top" ngbTooltip="Limpiar codigo"><i class="far fa-2x fa-trash-alt"></i></button>
+            <button class="btn btn-primary btn-circle mr-2" (click)="descargarCodigo()" placement="top" ngbTooltip="Descargar proyecto"><i class="far fa-2x fa-arrow-alt-circle-down"></i></button>
+            <button class="btn btn-secondary btn-circle mr-2" (click)="cerrar()" placement="top" ngbTooltip="Cerrar Proyecto"><i class="far fa-2x fa-times-circle"></i></button>
         </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-lg-6 p-0">
             <div class="row">
                 <div class="col-lg-12">    

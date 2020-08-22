@@ -12,8 +12,8 @@ import { AuthService} from '../services/auth.service'
 export class NavbarComponent implements OnInit {
  
   formLogin = new FormGroup({
-      email:new FormControl(''),
-      password: new FormControl('')
+      email:new FormControl('' ,Validators.required),
+      password: new FormControl('', Validators.required)
   });
 
   mostrar:boolean;
@@ -28,6 +28,12 @@ export class NavbarComponent implements OnInit {
       this.mostrar=true;
     }
   }
+  get email(){
+    return this.formLogin.get('email')
+  }
+  get password(){
+    return this.formLogin.get('password')
+  }
   
   iniciarSesion(){
     this.auth.login(this.formLogin.value).subscribe((res:any)=>{
@@ -37,7 +43,7 @@ export class NavbarComponent implements OnInit {
           this.router.navigate(['principal',{id:id}]);
           
         }else{
-          console.log('error')
+          alert(res.mensaje)
         }
     })
   }

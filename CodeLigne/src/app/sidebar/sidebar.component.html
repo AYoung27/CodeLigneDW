@@ -27,6 +27,14 @@
                 <a href="#" class=" enlace" [routerLink]="['/snippets',{'id':idUsuario}]">Snippets</a>
             </div>    
         </div>
+        <div class="row mb-3 ml-auto mr-auto">
+          <div class="col-lg-2">
+              <i class="far fa-credit-card"></i>
+          </div>
+          <div class="col-lg-8">
+              <a href="#" class=" enlace" [routerLink]="['/planes',{'id':idUsuario}]">Actualiza tu plan</a>
+          </div>    
+      </div>
       </div>
       <div class="mt-auto ml-auto mr-auto mb-5">
             <a class="enlace" (click)="cerrarSesion()" ><button class="btn btn-outline-light">Cerrar sesion</button></a>

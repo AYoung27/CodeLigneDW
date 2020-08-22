@@ -5,6 +5,8 @@ import { pipe } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router'
+import * as FileSaver from 'file-saver';
+import * as JSZip from 'jszip'
 
 
 
@@ -69,5 +71,31 @@ export class EditorcodigoComponent implements OnInit {
 
   cerrar(){
     this.router.navigate(['proyectos',{id:this.idUsuario,idCarpeta:this.idCarpeta}]);
+  }
+
+
+  descargarCodigo(){
+     let estructuraHTML=`<!DOCTYPE html>
+                            <html>
+                              <head>
+                                <title>`+this.nombreProyecto+`</title>
+                              </head>
+                              <body>
+                                  `+this.codigoHTML+`
+                              </body>
+                            </html>`
+    let zip = new JSZip();
+    zip.file('index.html',estructuraHTML);
+    
+    var controlador =zip.folder('js');
+    controlador.file('controlador.js',this.codigoJS);
+
+    var estilos = zip.folder('css');
+    estilos.file('estilos.css',this.codigoCSS);
+
+    zip.generateAsync({type:'blob'}).then(contenido=>{
+      FileSaver.saveAs(contenido,`${this.nombreProyecto}.zip`)
+    });
+    
   }
 }

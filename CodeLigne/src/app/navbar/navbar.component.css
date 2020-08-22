@@ -39,3 +39,8 @@
   text-decoration: none;
   color: inherit;
 }
+
+.error{
+  margin:0;
+  color:red;
+}
