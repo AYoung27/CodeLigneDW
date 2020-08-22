@@ -1,12 +1,25 @@
 
 
-    <a class="enlace" [routerLink]="['/proyectos',{id:idUsuario,idCarpeta:carpeta._id}]">
+    
     <div class="card">
-        <img src="assets/img/carpeta.png" class="card-img-top mr-auto ml-auto"  alt="EditarCodigo" >
-        
+        <a class="enlace" [routerLink]="['/proyectos',{id:idUsuario,idCarpeta:carpeta._id}]">
+            <img src="assets/img/carpeta.png" class="card-img-top mr-auto ml-auto"  alt="EditarCodigo" >
+        </a>
         <div class="card-body">
+            <div class="float-right "><button class="btn btn-danger btn-circle" (click)="eliminar(eliminarCarpeta)"><i class="far fa-trash-alt"></i></button></div>
             <h5 class="fs">{{carpeta.nombreCarpeta}}</h5>
             <p class="fs">{{carpeta.descripcion}}</p>
         </div>
     </div>
-    </a>
+    
+    <ng-template #eliminarCarpeta let-modal>
+    
+        <div class="modal-body">
+            <h3>Esta seguro de eliminar la carpeta</h3>
+        </div>
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+          <button type="button" class="btn btn-outline-danger" (click)="borrar(carpeta._id)">Eliminar</button>
+        </div>
+      </ng-template>

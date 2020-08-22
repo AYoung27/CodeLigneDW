@@ -1,4 +1,5 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit ,Input, Output, EventEmitter} from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-card-snippets',
@@ -11,7 +12,8 @@ export class CardSnippetsComponent implements OnInit {
 
   @Input() idUsuario:any
 
-  constructor() { }
+  @Output() eventoBorrarSnippet = new EventEmitter()
+  constructor(private modalService:NgbModal) { }
 
   ngOnInit(): void {
   }
@@ -24,7 +26,22 @@ export class CardSnippetsComponent implements OnInit {
         return 'green';
       case 'ruby':
         return 'red';
+      case 'perl':
+        return 'blue';
+      case 'cobol':
+        return 'peru';
+      case 'otro':
+        return 'sandybrown'       
     }
   }
 
+  eliminar(modal){
+    this.modalService.open(modal,{size:'sm'})
+  }
+
+  borrar(idSnippet){
+    this.eventoBorrarSnippet.emit(idSnippet);
+    console.log(idSnippet)
+    this.modalService.dismissAll()
+  }
 }

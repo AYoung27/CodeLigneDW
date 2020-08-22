@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-card-proyectos',
@@ -11,9 +12,22 @@ export class CardProyectosComponent implements OnInit {
   @Input() idUsuario:any
 
   @Input() idCarpeta:any
-  constructor() { }
+
+  @Output() eventoBorrarProyecto = new EventEmitter()
+
+  constructor(private modalService:NgbModal) { }
 
   ngOnInit(): void {
   }
 
+
+  eliminar(modal){
+    this.modalService.open(modal,{size:'sm'})
+  }
+
+  borrar(idProyecto){
+    this.eventoBorrarProyecto.emit(idProyecto);
+    console.log(idProyecto)
+    this.modalService.dismissAll()
+  }
 }

@@ -36,26 +36,47 @@ export class ProyectosComponent implements OnInit {
   abrirModalProyecto(modal){
     this.modalService.open(modal,
       {
-      size:'xs',
+      size:'md',
       centered:false
     })
 
   }
 
   nProyecto(){
+    if(this.contadorProyectos!="ilimitado"){
+      this.contadorProyectos=parseInt(this.contadorProyectos)
+    }
     if(this.contadorProyectos>0||this.contadorProyectos=='ilimitado'){
       this.httpClient.put(this.url+this.idUsuario+'/carpetas/'+this.idCarpeta+'/proyectos',this.nuevo).subscribe((res:any)=>{
         if(res.ok==1){
           this.modalService.dismissAll();
-          this.contadorProyectos--;
-          console.log(this.contadorProyectos)
-          this.httpClient.put(this.url+this.idUsuario+'/actualizarProyectos',{nProyectos:this.contadorProyectos}).subscribe((res:any)=>{})
+          if(this.contadorProyectos!='ilimitado'){
+            this.contadorProyectos--;
+            console.log(this.contadorProyectos)
+            this.httpClient.put(this.url+this.idUsuario+'/actualizarProyectos',{nProyectos:this.contadorProyectos}).subscribe((res:any)=>{})
+          }
           this.ngOnInit();
         }
       })
     }else{
       alert('Ha superado la cantidad de proyectos permitos')
     }
+  }
+
+  eliminarProyecto(idProyecto){
+    if(this.contadorProyectos!="ilimitado"){
+      this.contadorProyectos=parseInt(this.contadorProyectos)
+    }
+    this.httpClient.put(this.url+this.idUsuario+'/carpetas/'+this.idCarpeta+'/proyectos/'+idProyecto+'/eliminar',{}).subscribe((res:any)=>{
+      if(res.nModified==1){
+        if(this.contadorProyectos!="ilimitado"){
+          this.contadorProyectos++;
+          console.log(this.contadorProyectos)
+          this.httpClient.put(this.url+this.idUsuario+'/actualizarProyectos',{nProyectos:this.contadorProyectos}).subscribe((res:any)=>{})
+        }
+        this.ngOnInit()
+      }
+    })
   }
 
 }

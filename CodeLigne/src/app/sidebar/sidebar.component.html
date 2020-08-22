@@ -3,13 +3,30 @@
     <div class="bg-light border-right sidebar" id="sidebar-wrapper">
       <div class="sidebar-header">
           <img class="rounded-circle" src="assets/img/user.webp" alt="">
-          <h4 class="ml-3 mr-4">{{nombre}}</h4>
+          <h4 class="ml-3 mr-4">{{perfil.nombre}} {{perfil.apellido}}</h4>
           <a class="enlace" (click)="closeToggle()"><i class="fas fa-2x fa-arrow-right" ></i></a>
       </div>
-      <div class="list-group list-group-flush">
-          <a class="enlace ml-auto mr-auto mt-3" (click)=abrirModal(modalModificarPerfil)>Modificar Perfil</a>
-
-          <a class="enlace ml-auto mr-auto mt-3" (click)=abrirModal(modalModificarPerfil)>Cambiar contraseña</a>
+      <div class="container">
+        <div class="row mt-3 mb-3 ml-auto mr-auto">
+          <div class="col-lg-2"><i class="far fa-user"></i></div>
+          <div class="col-lg-8">
+            <a class="enlace ml-auto mr-auto mt-3" (click)=abrirModal(modalModificarPerfil)>Modificar Perfil</a>
+          </div>
+        </div>  
+          <div class="row mb-3 ml-auto mr-auto">
+            <div class="col-lg-2"><i class="fas fa-key"></i></div>
+            <div class="col-lg-8">
+              <a class="enlace ml-auto mr-auto mt-3" (click)=abrirModal(modalModificarPass)>Cambiar contraseña</a>
+            </div>
+        </div>
+          <div class="row mb-3 ml-auto mr-auto">
+            <div class="col-lg-2">
+                <i class="far fa-file-code"></i>
+            </div>
+            <div class="col-lg-8">
+                <a href="#" class=" enlace" [routerLink]="['/snippets',{'id':idUsuario}]">Snippets</a>
+            </div>    
+        </div>
       </div>
       <div class="mt-auto ml-auto mr-auto mb-5">
             <a class="enlace" (click)="cerrarSesion()" ><button class="btn btn-outline-light">Cerrar sesion</button></a>
@@ -19,13 +36,18 @@
 
     <ng-template #modalModificarPerfil let-modal>
       <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <h4 class="modal-title" id="modal-basic-title">Modifica tu perfil</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-       
+            <label for="nombre">Nuevo nombre:</label>
+            <input type="text" id="nombre" class="form-control" [(ngModel)]="perfil.nombre">
+            <label for="apellido">Nuevo apellido</label>
+            <input type="text" id="apellido" class="form-control" [(ngModel)]="perfil.apellido">
+            <label for="correo">Nuevo correo</label>
+            <input type="email" id="correo" class="form-control" [(ngModel)]="perfil.email">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modificarPerfil()">Guardar cambios</button>
@@ -33,3 +55,20 @@
       </div>
     </ng-template>
    
+    <ng-template #modalModificarPass let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Modifica tu perfil</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <label for="pass">Ingresa la nueva contraseña:</label>
+            <input type="text" id="pass" class="form-control" [formControl]="password">
+            <p class="error" *ngIf="password.invalid && (password.dirty || password.touched)">Campo obligatorio</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modificarPass()">Guardar cambios</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+      </div>
+    </ng-template>

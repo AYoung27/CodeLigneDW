@@ -39,15 +39,39 @@ export class SnippetsComponent implements OnInit {
   }
 
   nSnippet(){
+    if(this.contadorSnippet!="ilimitado"){
+      this.contadorSnippet=parseInt(this.contadorSnippet)
+    }
     if(this.contadorSnippet>0 || this.contadorSnippet=='ilimitado'){
     this.httpClient.put(this.url+this.idUsuario+'/snippets',this.nuevo).subscribe((res:any)=>{
       if(res.ok==1){
         this.modalService.dismissAll();
-        this.contadorSnippet--
-        this.httpClient.put(this.url+this.idUsuario+'/actualizarSnippets',{nSnippets:this.contadorSnippet})
+        if(this.contadorSnippet!="ilimitado"){
+          this.contadorSnippet--
+          this.httpClient.put(this.url+this.idUsuario+'/actualizarSnippets',{nSnippets:this.contadorSnippet}).subscribe(res=>{})
+        }
         this.ngOnInit();
       }
     })
+    }else{
+      alert('Ha superado el numero de snippets de su plan');
+      this.modalService.dismissAll()
     }
+  }
+
+  eliminarSnippet(idSnippet){
+    if(this.contadorSnippet!="ilimitado"){
+      this.contadorSnippet=parseInt(this.contadorSnippet)
+    }
+    this.httpClient.put(this.url+this.idUsuario+'/snippets/'+idSnippet+'/eliminar',{}).subscribe((res:any)=>{
+      if(res.nModified==1){
+        if(this.contadorSnippet!="ilimitado"){
+          this.contadorSnippet++;
+          console.log(this.contadorSnippet)
+          this.httpClient.put(this.url+this.idUsuario+'/actualizarSnippets',{nSnippets:this.contadorSnippet}).subscribe((res:any)=>{})
+        }
+        this.ngOnInit()
+      }
+    })
   }
 }

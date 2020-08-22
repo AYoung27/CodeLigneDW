@@ -31,12 +31,16 @@ export class EditorSnippetComponent implements OnInit {
     switch (lenguaje) {
       case 'php':
         return 'application/x-httpd-php'
-        break;
       case 'python':
         return 'text/x-php'
-    
-      default:
-        break;
+      case 'perl':  
+        return 'text/x-perl'
+      case 'ruby':  
+        return 'text/x-ruby'
+      case 'c++':  
+        return 'text/x-c++src'
+      case 'otro':
+        return 'text/x-markdown'
     }
   }
   guardar(){

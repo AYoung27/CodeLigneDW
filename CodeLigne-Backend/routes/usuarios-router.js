@@ -5,9 +5,11 @@ var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 const { updateOne } = require('../models/usuarios');
+const usuarios = require('../models/usuarios');
 
 var jwtSecret = 'codeligne_DW2020';
 
+//funcion para encriptar la contrase;a
 function encryptPass(password){
     const salt = bcrypt.genSaltSync(10);
      return bcrypt.hashSync(password,salt)
@@ -34,7 +36,7 @@ router.post('/signUp',function(req,res){
         res.end();
     })
 });
-
+//funcion para comparar la contrase;a encriptada
 function comparePass(password,encryptPassword){
     return bcrypt.compareSync(password,encryptPassword);
 }
@@ -125,6 +127,56 @@ router.get('/:idUsuario/planes',verifyToken,function(req,res){
     })
 })
 
+//obtener un usuario
+router.get('/:idUsuario', verifyToken ,function(req,res){
+    usuario.findOne({
+        _id:mongoose.Types.ObjectId(req.params.idUsuario)
+    },{carpetas:false,snippets:false}).then(result=>{
+        res.send(result);
+        res.end()
+    }).catch(error=>{
+        res.send(error);
+        res.end();
+    })
+})
+
+//actualizar perfil de usuario
+router.put('/:idUsuario/actualizarPerfil',verifyToken,function(req,res){
+    usuario.updateOne(
+        {
+            _id:mongoose.Types.ObjectId(req.params.idUsuario)
+        },
+        {
+            nombre:req.body.nombre,
+            apellido:req.body.apellido,
+            email:req.body.email
+        }
+    ).then(result=>{
+        res.send(result);
+        res.end();
+    }).catch(error=>{
+        res.send(error);
+        res.end();
+    })
+})
+//cambiar contrase;a
+router.put('/:idUsuario/cambiarPass',verifyToken,function(req,res){
+    const password=encryptPass(req.body.password)
+    usuario.updateOne(
+        {
+            _id:mongoose.Types.ObjectId(req.params.idUsuario)
+        },{
+            password:password
+        }
+    ).then(result=>{
+        res.send(result);
+        res.end();
+    }).catch(error=>{
+        res.send(error);
+        res.end();
+    })
+})
+
 
 //crear una carpeta
 router.put('/:idUsuario',verifyToken,function(req,res){
@@ -145,7 +197,26 @@ router.put('/:idUsuario',verifyToken,function(req,res){
             res.send(result);
             res.end()
         }).catch(error=>{
+            res.send(error);
+            res.end();
+        })
+});
+//eliminar una carpeta
+router.put('/:idUsuario/carpetas/:idCarpeta/eliminar',verifyToken,function(req,res){
+    usuario.updateOne(
+        {
+            _id:mongoose.Types.ObjectId(req.params.idUsuario),
+            "carpetas._id":mongoose.Types.ObjectId(req.params.idCarpeta)
+        },
+        {
+            $pull:{
+                "carpetas":{_id:mongoose.Types.ObjectId(req.params.idCarpeta)}
+            }
+        }).then(result=>{
             res.send(result);
+            res.end()
+        }).catch(error=>{
+            res.send(error);
             res.end();
         })
 });
@@ -167,18 +238,7 @@ router.put('/:idUsuario/actualizarCarpetas',verifyToken,function(req,res){
     })
 })
 
-//obtener un usuario
-router.get('/:idUsuario', verifyToken ,function(req,res){
-    usuario.findOne({
-        _id:mongoose.Types.ObjectId(req.params.idUsuario)
-    },{carpetas:false,password:false}).then(result=>{
-        res.send(result);
-        res.end()
-    }).catch(error=>{
-        res.send(error);
-        res.end();
-    })
-})
+
 
 //obtener todas las carpetas
 router.get('/:idUsuario/carpetas',verifyToken,function(req,res){
@@ -301,6 +361,27 @@ router.put('/:idUsuario/carpetas/:idCarpeta/proyectos',verifyToken,function(req,
             res.end();
         })
 });
+//eliminar proyectos
+router.put('/:idUsuario/carpetas/:idCarpeta/proyectos/:idProyecto/eliminar',verifyToken,function(req,res){
+    usuario.update(
+        {
+            _id:mongoose.Types.ObjectId(req.params.idUsuario),
+            "carpetas._id":mongoose.Types.ObjectId(req.params.idCarpeta),
+            "carpetas.proyectos._id":mongoose.Types.ObjectId(req.params.idProyecto) 
+        },
+        {
+            $pull:{
+                "carpetas.$.proyectos":{_id:mongoose.Types.ObjectId(req.params.idProyecto) }
+            }
+        }).then(result=>{
+            res.send(result);
+            res.end()
+        }).catch(error=>{
+            res.send(error);
+            res.end();
+        })
+});
+
 
 //guardar codigo en un proyecto
 router.put('/:idUsuario/carpetas/:idCarpeta/proyectos/:idProyecto',verifyToken,function(req,res){
@@ -365,6 +446,26 @@ router.get('/:idUsuario/snippets',verifyToken,function(req,res){
         res.send(error);
         res.end();
     })
+});
+
+//eliminar una carpeta
+router.put('/:idUsuario/snippets/:idSnippet/eliminar',verifyToken,function(req,res){
+    usuario.updateOne(
+        {
+            _id:mongoose.Types.ObjectId(req.params.idUsuario),
+            "snippets._id":mongoose.Types.ObjectId(req.params.idSnippet)
+        },
+        {
+            $pull:{
+                "snippets":{_id:mongoose.Types.ObjectId(req.params.idSnippet)}
+            }
+        }).then(result=>{
+            res.send(result);
+            res.end()
+        }).catch(error=>{
+            res.send(error);
+            res.end();
+        })
 });
 
 //actualizar numero de snippets permitidos

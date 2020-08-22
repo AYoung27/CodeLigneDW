@@ -9,9 +9,10 @@ import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/php/php';
 import 'codemirror/mode/python/python';
-import 'codemirror/mode/cobol/cobol';
+import 'codemirror/mode/clike/clike';
 import 'codemirror/mode/ruby/ruby';
 import 'codemirror/mode/perl/perl';
+import 'codemirror/mode/markdown/markdown'
 
 
 

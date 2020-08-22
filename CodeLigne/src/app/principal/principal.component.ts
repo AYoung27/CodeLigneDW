@@ -44,12 +44,17 @@ export class PrincipalComponent implements OnInit {
   }
 
   nCarpeta(){
+    if(this.contadorCarpetas!="ilimitado"){
+      this.contadorCarpetas=parseInt(this.contadorCarpetas)
+    }
     if(this.contadorCarpetas>0 || this.contadorCarpetas=='ilimitado'){
     this.httpClient.put(this.url+this.id,this.nueva).subscribe((res:any)=>{
       if(res.ok==1){
         this.modalService.dismissAll();
-        this.contadorCarpetas--;
-        this.httpClient.put(this.url+this.id+'/actualizarCarpetas',{nCarpetas:this.contadorCarpetas}).subscribe((res:any)=>{})
+        if(this.contadorCarpetas!="ilimitado"){
+          this.contadorCarpetas--;
+          this.httpClient.put(this.url+this.id+'/actualizarCarpetas',{nCarpetas:this.contadorCarpetas}).subscribe((res:any)=>{})
+        }
         this.ngOnInit();
       }
     })
@@ -58,6 +63,22 @@ export class PrincipalComponent implements OnInit {
     alert('Has sobrepasado el numero de carpetas para tu plan');
     this.modalService.dismissAll()
   }
+  }
+
+  eliminarCarpeta(idCarpeta){
+    if(this.contadorCarpetas!="ilimitado"){
+      this.contadorCarpetas=parseInt(this.contadorCarpetas)
+    }
+    this.httpClient.put(this.url+this.id+'/carpetas/'+idCarpeta+'/eliminar',{}).subscribe((res:any)=>{
+      if(res.nModified==1){
+        if(this.contadorCarpetas!="ilimitado"){
+          this.contadorCarpetas++;
+          console.log(this.contadorCarpetas)
+          this.httpClient.put(this.url+this.id+'/actualizarCarpetas',{nCarpetas:this.contadorCarpetas}).subscribe((res:any)=>{})
+        }
+        this.ngOnInit()
+      }
+    })
   }
   
 

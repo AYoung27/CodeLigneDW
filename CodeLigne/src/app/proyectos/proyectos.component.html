@@ -1,51 +1,20 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <div class="row">
-        <div class="col-lg-2">
-            <div class="row mt-3 mb-4">
-                <button class="btn btn-outline-light ml-auto mr-auto" (click)="abrirModalProyecto(nuevoProyecto)">Nuevo Proyecto</button>
-            </div>
-            
-                <div class="row mb-3 ml-auto mr-auto">
-                    <div class="col-lg-2">
-                        <i class="far fa-clock"></i>
-                    </div>
-                    <div class="col-lg-8">
-                        <a href="#" class="enlace">Recientes</a>
-                    </div>
-                </div>
-                <div class="row mb-3 ml-auto mr-auto">
-                    <div class="col-lg-2">
-                        <i class="far fa-star "></i>
-                    </div>
-                    <div class="col-lg-8">
-                        <a href="#" class="enlace">Destacados</a>
-                    </div>    
-                </div>
-                <div class="row mb-3 ml-auto mr-auto">
-                    <div class="col-lg-2">
-                        <i class="far fa-trash-alt"></i>
-                    </div>
-                    <div class="col-lg-8">
-                        <a href="#" class="enlace">Papelera</a>
-                    </div>    
-                </div>
-           
-        </div>
-        <div class="col-lg-8 mt-5" >
-            <div class="row" id="proyectos">
-                <div class="col-lg-3 mt-3" *ngFor="let proyecto of proyectos">
-                    <app-card-proyectos [proyecto]="proyecto" [idUsuario]="idUsuario" [idCarpeta]="idCarpeta"></app-card-proyectos>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2">
-            detalles y opciones del proyecto
-        </div>
+    
+    <div class="row mt-3 justify-content-center">
+        <button class="btn btn-outline-light ml-auto mr-auto" (click)="abrirModalProyecto(nuevoProyecto)">Nuevo Proyecto</button>
+    </div>
+    <div class="row justify-content-center" *ngIf="proyectos.length==0">
+      <img src="assets/Proyectovacio.png" height="500" class="img-fluid" alt="vacio">
 
     </div>
-
+    <div class="row" id="proyectos">
+        <div class="col-sm-6 col-md-4 col-lg-3 mt-3" *ngFor="let proyecto of proyectos">
+            <app-card-proyectos [proyecto]="proyecto" [idUsuario]="idUsuario" [idCarpeta]="idCarpeta" (eventoBorrarProyecto)="eliminarProyecto($event)"></app-card-proyectos>
+        </div>
+    </div>
 </div>
+
 <app-sidebar></app-sidebar>
 <ng-template #nuevoProyecto let-modal>
     <div class="modal-header">

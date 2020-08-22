@@ -1,12 +1,26 @@
-<a class="enlace" [routerLink]="['/editorSnippet',{'id':idUsuario, 'idsnippet':snippet._id}]">
+
     <div class="card">
-        <img src="assets/img/proyecto.png" class="card-img-top mr-auto ml-auto"  alt="EditarCodigo" >
-        
+        <a class="enlace" [routerLink]="['/editorSnippet',{'id':idUsuario, 'idsnippet':snippet._id}]">
+            <img src="assets/img/proyecto.png" class="card-img-top mr-auto ml-auto"  alt="EditarCodigo" >
+        </a>
         <div class="card-body">
+            <div class="float-right "><button class="btn btn-danger btn-circle" (click)="eliminar(eliminarSnippet)"><i class="far fa-trash-alt"></i></button></div>
             <h5 class="fs">{{snippet.nombreSnippet}}</h5>
             <p class="fs">{{snippet.descripcion}}</p>
             <span class="badge badge-pill mr-2 text-white" [style.background-color]="getColor(snippet.lenguaje)">{{snippet.lenguaje}}</span>
 
         </div>
     </div>
-    </a>
+    
+
+    <ng-template #eliminarSnippet let-modal>
+    
+        <div class="modal-body">
+            <h3>Esta seguro de eliminar este snippet</h3>
+        </div>
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+          <button type="button" class="btn btn-outline-danger" (click)="borrar(snippet._id)">Eliminar</button>
+        </div>
+      </ng-template>
